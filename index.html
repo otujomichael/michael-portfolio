@@ -1,0 +1,392 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Otujo - Digital Marketing Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @keyframes rotateIn {
+            from { transform: rotate(-10deg); opacity: 0; }
+            to { transform: rotate(0deg); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes borderPulse {
+            0% { border-color: #1E40AF; box-shadow: 0 0 5px #1E40AF; }
+            50% { border-color: #FFFFFF; box-shadow: 0 0 10px #FFFFFF; }
+            100% { border-color: #1E40AF; box-shadow: 0 0 5px #1E40AF; }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+        .animate-bounceIn {
+            animation: bounceIn 0.5s ease-out forwards;
+        }
+        .animate-rotateIn {
+            animation: rotateIn 0.7s ease-out forwards;
+        }
+        .animate-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .border-pulse {
+            animation: borderPulse 2s infinite;
+            border: 1px solid #1E40AF;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #1E40AF;
+        }
+        /* Custom Colors */
+        .bg-blue { background-color: #1E40AF; }
+        .text-blue { color: #1E40AF; }
+        .bg-dark-gray { background-color: #1F2937; }
+        .text-white { color: #FFFFFF; }
+        .bg-black { background-color: #000000; }
+        .text-black { color: #000000; }
+        /* Black Theme */
+        body {
+            background-color: #000000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        /* Mobile Menu Toggle */
+        #menu-toggle:checked ~ .nav-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Home Section with Navigation -->
+    <section id="home" class="min-h-screen bg-black flex items-center relative py-6">
+        <div class="container mx-auto px-4">
+            <!-- Navigation in Top-Right Corner -->
+            <div class="absolute top-4 right-4">
+                <input type="checkbox" id="menu-toggle" class="hidden">
+                <label for="menu-toggle" class="md:hidden text-white text-2xl cursor-pointer">☰</label>
+                <div class="nav-menu hidden md:flex flex-col md:flex-row md:gap-2 bg-dark-gray p-3 rounded-lg border-pulse">
+                    <a href="#introduction" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.2s;">Introduction</a>
+                    <a href="#education" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.3s;">Education</a>
+                    <a href="#skills" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.4s;">Skills</a>
+                    <a href="#experience" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.5s;">Experience</a>
+                    <a href="#projects" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.6s;">Projects</a>
+                    <a href="#cv" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.7s;">Download CV</a>
+                    <a href="#contact" class="nav-link px-2 py-1 text-white text-xs font-semibold hover:text-blue animate-fadeInUp" style="animation-delay: 0.8s;">Contact</a>
+                </div>
+            </div>
+            <!-- Michael Otujo and Title -->
+            <div class="text-center animate-bounceIn">
+                <h1 class="text-5xl md:text-6xl font-bold text-white">Michael Otujo</h1>
+                <p class="text-2xl mt-3 text-blue">Digital Marketing Expert & Social Media Manager</p>
+                <a href="#contact" class="mt-4 inline-block bg-blue text-white px-8 py-3 rounded-full font-semibold hover:bg-blue/80 transition-colors animate-pulse">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Introduction</h2>
+            <p class="text-lg text-white max-w-3xl mx-auto leading-relaxed animate-fadeInLeft">
+                I’m Michael Otujo, a passionate and results-oriented Digital Marketing Expert and Social Media Manager based in Lagos, Nigeria. With a keen eye for storytelling and a data-driven approach, I specialize in crafting impactful digital campaigns that resonate with audiences and drive business growth. My experience at SKLD (Fashion and Lifestyle), SBA Group, and Obinex has honed my ability to create engaging content and strategies that deliver measurable results. I’m dedicated to leveraging creativity and analytics to elevate brands in today’s competitive digital landscape.
+            </p>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Education</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-fadeInLeft">
+                    <h3 class="text-2xl font-bold text-white">B.Sc. in Marketing</h3>
+                    <p class="text-lg text-blue">University of Lagos | 2018 - 2022</p>
+                    <p class="text-white mt-4">
+                        Studied marketing principles, consumer behavior, and digital advertising strategies. Completed coursework in social media marketing and data analytics, with a focus on practical applications in brand management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Personal Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-bold text-white">Social Media Management</h3>
+                    <p class="text-white">Developing strategies for platforms like Instagram and LinkedIn.</p>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.2s;">
+                    <h3 class="text-xl font-bold text-white">Content Creation</h3>
+                    <p class="text-white">Producing compelling visuals and copy for campaigns.</p>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-bold text-white">Analytics & Reporting</h3>
+                    <p class="text-white">Leveraging data to optimize campaign performance.</p>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.4s;">
+                    <h3 class="text-xl font-bold text-white">Brand Strategy</h3>
+                    <p class="text-white">Crafting cohesive brand identities online.</p>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.5s;">
+                    <h3 class="text-xl font-bold text-white">Creative Storytelling</h3>
+                    <p class="text-white">Building narratives that connect with audiences.</p>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg text-center shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.6s;">
+                    <h3 class="text-xl font-bold text-white">Team Collaboration</h3>
+                    <p class="text-white">Working effectively with cross-functional teams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Work Experience</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-fadeInLeft">
+                    <h3 class="text-2xl font-bold text-white">Social Media Manager & Content Creator</h3>
+                    <p class="text-lg text-blue">SKLD (Fashion and Lifestyle) | Lagos, Nigeria | Aug 2023 - May 2024</p>
+                    <ul class="list-disc list-inside text-white mt-4 space-y-2">
+                        <li>Designed and executed social media campaigns, increasing Instagram engagement by 120%.</li>
+                        <li>Produced high-impact reels and posts, enhancing brand visibility.</li>
+                        <li>Managed content calendars and collaborated with creative teams.</li>
+                        <li>Utilized analytics tools to optimize campaigns for maximum impact.</li>
+                    </ul>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-bold text-white">Digital Marketing Consultant</h3>
+                    <p class="text-lg text-blue">SBA Group Afrique | Lagos, Nigeria | Jun 2024 - Present</p>
+                    <ul class="list-disc list-inside text-white mt-4 space-y-2">
+                        <li>Developed LinkedIn content strategies, boosting impressions by 30%.</li>
+                        <li>Created posts to highlight partnerships and events, enhancing B2B engagement.</li>
+                        <li>Collaborated with marketing teams to align content with business objectives.</li>
+                        <li>Monitored campaign metrics to refine strategies and improve reach.</li>
+                    </ul>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-fadeInLeft" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-white">Digital Marketing Specialist</h3>
+                    <p class="text-lg text-blue">Obinex | Lagos, Nigeria | [Dates, e.g., Jan 2023 - Jul 2023]</p>
+                    <ul class="list-disc list-inside text-white mt-4 space-y-2">
+                        <li>Developed and implemented digital marketing strategies to enhance Obinex's online presence.</li>
+                        <li>Created engaging content for social media platforms, increasing audience engagement.</li>
+                        <li>Analyzed campaign performance to optimize content and drive conversions.</li>
+                        <li>Collaborated with teams to align marketing efforts with business goals.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Project Portfolio</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- SKLD Projects -->
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn">
+                    <h3 class="text-xl font-bold text-white">SKLD Instagram Campaign</h3>
+                    <p class="text-white mt-2">Orchestrated a vibrant Instagram campaign for SKLD, significantly increasing follower engagement.</p>
+                    <a href="https://www.instagram.com/skit.ng" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Campaign</a>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-bold text-white">SKLD Promotional Reel</h3>
+                    <p class="text-white mt-2">Created a high-energy reel to promote SKLD's fashion line, achieving an 80% increase in views.</p>
+                    <a href="https://www.instagram.com/reel/C3-jOOUIAvR/" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Reel</a>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn" style="animation-delay: 0.2s;">
+                    <h3 class="text-xl font-bold text-white">SKLD Brand Awareness Reel</h3>
+                    <p class="text-white mt-2">Produced a reel to elevate SKLD's brand visibility, resulting in a 50% increase in shares.</p>
+                    <a href="https://www.instagram.com/reel/C3SDOuxs_12/" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Reel</a>
+                </div>
+                <!-- SBA Group Projects -->
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn" style="animation-delay: 0.3s;">
+                    <h3 class="text-xl font-bold text-white">SBA Group - Propak West Africa 2024</h3>
+                    <p class="text-white mt-2">Managed LinkedIn content for SBA Group's Propak West Africa 2024, showcasing packaging innovations.</p>
+                    <a href="https://www.linkedin.com/posts/sba-group-afrique_sbagroup-propakwestafrica2024-packaginginnovation-activity-7246489753179607041-4VTJ" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Post</a>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn" style="animation-delay: 0.4s;">
+                    <h3 class="text-xl font-bold text-white">SBA Group - Bature Brewery</h3>
+                    <p class="text-white mt-2">Crafted LinkedIn posts to highlight SBA Group's collaboration with Bature Brewery.</p>
+                    <a href="https://www.linkedin.com/posts/sba-group-afrique_sbagroup-ziemannholvrieka-baturebrewery-ugcPost-7244352852649820160-dNtC" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Post</a>
+                </div>
+                <div class="bg-dark-gray p-6 rounded-lg shadow-lg hover-scale animate-rotateIn" style="animation-delay: 0.5s;">
+                    <h3 class="text-xl font-bold text-white">SBA Group - UNIDO Oil Palm</h3>
+                    <p class="text-white mt-2">Developed LinkedIn content for SBA Group's UNIDO Oil Palm project, boosting impressions by 30%.</p>
+                    <a href="https://www.linkedin.com/posts/sba-group-afrique_sbagroup-unido-oilpalm-activity-7267825168645771265-qc5k" target="_blank" class="text-blue hover:text-blue/80 mt-4 inline-block font-semibold">View Post</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download CV Section -->
+    <section id="cv" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Download Full CV</h2>
+            <div class="max-w-lg mx-auto text-center animate-fadeInLeft">
+                <p class="text-lg text-white mb-4">Download my complete CV to view a detailed overview of my qualifications and experience.</p>
+                <a href="[Your CV URL or file path, e.g., /assets/Michael_Otujo_CV.pdf]" target="_blank" class="inline-block bg-blue text-white px-8 py-3 rounded-full font-semibold hover:bg-blue/80 transition-colors animate-pulse">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-4 bg-black section-hidden">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-semibold text-center text-blue mb-4 animate-fadeInUp">Contact</h2>
+            <div class="max-w-lg mx-auto">
+                <div class="space-y-4 animate-fadeInLeft">
+                    <div class="bg-dark-gray p-6 rounded-lg shadow-lg">
+                        <p class="text-white"><strong>Email:</strong> otujom@gmail.com</p>
+                        <p class="text-white"><strong>Phone:</strong> +234-808-187-1793</p>
+                        <p class="text-white"><strong>Location:</strong> Lagos, Nigeria</p>
+                        <div class="mt-4">
+                            <a href="https://www.linkedin.com/in/otujo-michael-0b27b3309" target="_blank" class="text-blue hover:text-blue/80 mx-2 font-semibold">LinkedIn</a>
+                        </div>
+                    </div>
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 bg-dark-gray border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 bg-dark-gray border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue">
+                    <textarea id="message" placeholder="Your Message" rows="5" class="w-full p-3 bg-dark-gray border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue"></textarea>
+                    <button onclick="sendMessage()" class="w-full bg-blue text-white p-3 rounded-full font-semibold hover:bg-blue/80 transition-colors animate-pulse">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray py-8">
+        <div class="container mx-auto text-center animate-fadeInUp">
+            <p class="text-white">© 2025 Michael Otujo. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="https://www.linkedin.com/in/otujo-michael-0b27b3309" target="_blank" class="text-blue hover:text-blue/80 mx-2 font-semibold">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for section animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-hidden');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.classList.add('section-hidden');
+                observer.observe(section);
+            });
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking
+                document.getElementById('menu-toggle').checked = false;
+            });
+        });
+
+        // Contact form simulation
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert('Message sent successfully! (This is a demo, no real submission occurs.)');
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+    </script>
+</body>
+</html>
