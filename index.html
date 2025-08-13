@@ -40,333 +40,1059 @@
         </script><!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Michael Otujo - Digital Marketing Portfolio</title>
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <!-- Warning: Using Tailwind CSS CDN is for preview/development only. For production, install Tailwind as a PostCSS plugin or use Tailwind CLI: https://tailwindcss.com/docs/installation -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400&family=Wittgenstein:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .hover-scale {
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .hover-scale:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-    .animate-fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Otujo - Digital Marketing Specialist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Work+Sans:wght@400;600&family=Wittgenstein:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #000000;
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+        /* Make it responsive */
+        @media (max-width: 1440px) {
+            body {
+                padding: 0 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .flex-row {
+                flex-direction: column !important;
+            }
+            .width-full {
+                width: 100% !important;
+            }
+            .hero-image {
+                height: 300px !important;
+                width: 300px !important;
+            }
+            .nav-links {
+                gap: 10px !important;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .metric-cards {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+            .service-cards {
+                flex-direction: column !important;
+            }
+            .project-cards {
+                flex-direction: column !important;
+            }
+            .testimonial-cards {
+                flex-direction: column !important;
+            }
+            .contact-container {
+                flex-direction: column !important;
+            }
+            .contact-form {
+                padding: 20px !important;
+            }
+        }
+
+        /* Header/Nav */
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            position: fixed;
+            width: 100%;
+            max-width: 1440px;
+            height: 128px;
+            top: 0;
+            left: 0;
+            background: #000000;
+            z-index: 10;
+        }
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            gap: 477px;
+            width: 1159px;
+            height: 54px;
+        }
+        .logo {
+            font-family: 'Wittgenstein';
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 54px;
+            color: #FFFFFF;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 5px;
+            width: 620px;
+            height: 51px;
+        }
+        .nav-link {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            gap: 10px;
+            height: 51px;
+            border-radius: 100px;
+            font-family: 'Work Sans';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        .nav-link.active {
+            border: 1px solid #131926;
+        }
+
+        /* Body Sections */
+        .body-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            height: auto;
+            top: 128px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .introduction {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 87px;
+            width: 1152px;
+            height: auto;
+        }
+        .intro-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 51px;
+            width: 565px;
+            height: auto;
+        }
+        .intro-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 15px;
+            width: 565px;
+            height: auto;
+        }
+        .hello {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .title {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 34px;
+            line-height: 43px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .description {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            letter-spacing: 0.05em;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 36px;
+            width: 398px;
+            height: 67px;
+        }
+        .btn {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            gap: 10px;
+            width: 181px;
+            height: 67px;
+            border-radius: 100px;
+            font-family: 'Work Sans';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: #131926;
+            border: 1px solid #131926;
+        }
+        .btn-secondary {
+            border: 1px solid #131926;
+        }
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            gap: 45px;
+            width: 500px;
+            height: auto;
+        }
+        .hero-image {
+            width: 500px;
+            height: 500px;
+            background: #ccc; /* Placeholder for image */
+            border-radius: 100px;
+        }
+
+        /* About Section */
+        .about {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .about-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            gap: 47px;
+            width: 1160px;
+            height: auto;
+            flex-direction: row;
+        }
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 24px;
+            width: 569px;
+            height: auto;
+        }
+        .about-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            color: #4E5563;
+            width: 100%;
+        }
+        .about-des {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 16px;
+            width: 569px;
+            height: auto;
+        }
+        .about-title {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 34px;
+            line-height: 43px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .about-desc {
+            font-family: 'Space Grotesk';
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 26px;
+            letter-spacing: 0.05em;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .about-cards {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 24px;
+            width: 544px;
+            height: auto;
+        }
+        .metric-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 16px;
+            width: 100%;
+            height: auto;
+        }
+        .metric-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 16px;
+            gap: 20px;
+            width: 264px;
+            height: auto;
+            background: #131926;
+            border-radius: 10px;
+        }
+        .metric-number-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            gap: 12px;
+            width: 232px;
+            height: auto;
+        }
+        .metric-number {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 44px;
+            line-height: 56px;
+            text-align: center;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .metric-text {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            text-align: center;
+            color: #FFFFFF;
+            width: 100%;
+        }
+
+        /* Services Section (What I Do) */
+        .services {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .services-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+            gap: 40px;
+            width: 1160px;
+            height: auto;
+        }
+        .services-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 44px;
+            line-height: 56px;
+            color: #FFFFFF;
+        }
+        .service-cards {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 24px;
+            width: 1160px;
+            height: auto;
+        }
+        .service-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 24px;
+            width: 100%;
+            height: auto;
+        }
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 32px;
+            gap: 16px;
+            width: 370px;
+            height: auto;
+            background: #131926;
+            box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+        .service-icon {
+            width: 32px;
+            height: 32px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            position: relative;
+        }
+        .service-icon i {
+            position: absolute;
+            color: #4E5563;
+            font-size: 32px;
+        }
+        .social-media-icon i {
+            left: 7.14%;
+            right: 7.14%;
+            top: 7.14%;
+            bottom: 7.14%;
+        }
+        .video-optimize-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 8.33%;
+            bottom: 8.33%;
+        }
+        .seo-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 8.33%;
+            bottom: 8.33%;
+        }
+        .content-creation-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 16.67%;
+            bottom: 16.67%;
+        }
+        .email-marketing-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 16.67%;
+            bottom: 16.67%;
+        }
+        .analytics-icon i {
+            left: 6.25%;
+            right: 6.25%;
+            top: 6.25%;
+            bottom: 6.25%;
+        }
+        .content-strategy-icon i {
+            left: 18.75%;
+            right: 6.25%;
+            top: 28.12%;
+            bottom: 28.12%;
+        }
+        .team-collaboration-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 16.67%;
+            bottom: 16.67%;
+        }
+        .project-management-icon i {
+            left: 8.33%;
+            right: 8.33%;
+            top: 16.67%;
+            bottom: 16.67%;
+        }
+        .service-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            color: #FFFFFF;
+        }
+        .service-desc {
+            font-family: 'Space Grotesk';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            color: #FFFFFF;
+        }
+
+        /* Projects Section */
+        .projects {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .projects-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 40px;
+            width: 1160px;
+            height: auto;
+        }
+        .projects-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 44px;
+            line-height: 56px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .project-cards {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 24px;
+            width: 1160px;
+            height: auto;
+        }
+        .project-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 24px;
+            width: 100%;
+            height: auto;
+        }
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 32px;
+            gap: 16px;
+            width: 370px;
+            height: auto;
+            background: #131926;
+            box-shadow: 5px 5px 4px rgba(19, 25, 38, 0.25);
+            border-radius: 10px;
+        }
+        .project-title {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            color: #FFFFFF;
+        }
+        .project-desc {
+            font-family: 'Space Grotesk';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: #FFFFFF;
+        }
+        .view-link {
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            color: #6D6DF9;
+            text-decoration: none;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .testimonials-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 40px;
+            width: 1160px;
+            height: auto;
+        }
+        .testimonials-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 44px;
+            line-height: 56px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .testimonial-cards {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0;
+            gap: 18px;
+            width: 1162px;
+            height: auto;
+        }
+        .testimonial-card {
+            position: relative;
+            width: 572px;
+            height: auto;
+            background: linear-gradient(180deg, #131926 1%, rgba(19, 25, 38, 0) 100%);
+            backdrop-filter: blur(21px);
+            border-radius: 24px;
+            padding: 40px 32px;
+            gap: 10px;
+        }
+        .testimonial-quote {
+            font-family: 'Space Grotesk';
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 26px;
+            color: #FFFFFF;
+        }
+        .testimonial-name {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 34px;
+            line-height: 43px;
+            color: #FFFFFF;
+        }
+        .testimonial-position {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 26px;
+            color: #6262DF;
+        }
+
+        /* Contact Section */
+        .contact {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 40px;
+            width: 1160px;
+            height: auto;
+        }
+        .contact-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 44px;
+            line-height: 56px;
+            color: #FFFFFF;
+            width: 100%;
+        }
+        .contact-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0;
+            width: 1160px;
+            height: auto;
+            background: #FFFFFF;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 48px;
+            gap: 32px;
+            width: 464px;
+            height: auto;
+            background: #131926;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            gap: 32px;
+            width: 368px;
+            height: auto;
+        }
+        .contact-form-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 96px 0;
+            gap: 64px;
+            width: 696px;
+            height: auto;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 32px;
+            gap: 48px;
+            width: 512px;
+            height: auto;
+        }
+        .form-header {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 34px;
+            line-height: 43px;
+            color: #101828;
+        }
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            width: 100%;
+        }
+        .input-label {
+            font-family: 'Space Grotesk';
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            color: #131926;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #D0D5DD;
+            border-radius: 8px;
+            background: #FFFFFF;
+            box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+            font-family: 'Space Grotesk';
+            font-size: 14px;
+            color: #667085;
+        }
+        .textarea-field {
+            height: 128px;
+            resize: none;
+        }
+        .submit-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            width: 100%;
+            height: 67px;
+            background: #131926;
+            border: 1px solid #4E5563;
+            border-radius: 100px;
+            color: #FFFFFF;
+            font-family: 'Work Sans';
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 32px;
+        }
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            background: #4E5563; /* Placeholder */
+        }
+    </style>
 </head>
-<body class="bg-[#000000] text-white font-space-grotesk">
-  <div id="root"></div>
-  <script type="text/babel">
-    const App = () => {
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        alert('Form submitted! (Note: This is a static demo; add backend for full functionality.)');
-      };
-
-      return (
-        <div className="min-h-screen flex flex-col items-center">
-          {/* Navigation */}
-          <nav className="w-full max-w-[1440px] flex justify-center py-2.5">
-            <div className="w-[1159px] flex justify-between items-center">
-              <div className="text-[36px] font-wittgenstein font-semibold text-white">MO</div>
-              <div className="flex items-center gap-1.5">
-                {['About', 'Services', 'Projects', 'Testimonials', 'Contact'].map((item, index) => (
-                  <a
-                    key={index}
-                    href={`#${item.toLowerCase()}`}
-                    className={`px-4 py-4 text-[16px] font-work-sans font-normal text-white rounded-[100px] hover-scale ${index === 0 ? 'border border-[#131926]' : ''}`}
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">MO</div>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-          </nav>
-
-          {/* Hero Section */}
-          <section id="hero" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1152px] flex flex-col md:flex-row items-center gap-[87px]">
-              <div className="flex flex-col gap-[51px]">
-                <div className="flex flex-col gap-[15px]">
-                  <h1 className="text-[20px] font-medium">Hello, I’m Michael Otujo</h1>
-                  <h2 className="text-[34px] font-medium">Digital Marketing Specialist</h2>
-                  <p className="text-[20px] font-medium leading-[26px] tracking-[0.05em]">
-                    I’m a results-driven digital marketer with over three years of experience in online marketing, social media strategy, and content marketing. I help brands grow their digital presence and connect with their audience in meaningful, impactful ways.
-                  </p>
-                </div>
-                <div className="flex gap-9">
-                  <a
-                    href="#cv"  {/* Replace with actual CV link */}
-                    className="px-6 py-6 bg-[#131926] border border-[#131926] rounded-[100px] text-[16px] font-work-sans font-normal hover-scale"
-                  >
-                    Download my CV
-                  </a>
-                  <a
-                    href="#contact"
-                    className="px-6 py-6 border border-[#131926] rounded-[100px] text-[16px] font-work-sans font-normal hover-scale"
-                  >
-                    Contact Me
-                  </a>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-[45px]">
-                <img
-                  src="https://via.placeholder.com/500"  {/* Replace with your uploaded image URL */}
-                  alt="Profile"
-                  className="w-[500px] h-[500px] rounded-[100px] object-cover"
-                />
-              </div>
-            </div>
-          </section>
-
-          {/* About Section */}
-          <section id="about" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1160px] flex flex-col md:flex-row justify-between gap-[47px]">
-              <div className="flex flex-col gap-6 max-w-[569px]">
-                <h2 className="text-[20px] font-medium text-[#4E5563]">About me</h2>
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-[34px] font-medium">Driving Growth Through Strategy</h3>
-                  <p className="text-[20px] font-normal leading-[26px] tracking-[0.05em]">
-                    I’ve successfully driven a 300% increase in social media impressions and achieved a 28% engagement rate by using tools like SEMrush, Google Analytics, and Mailchimp with strategic precision. My expertise spans both B2B and B2C campaigns across industries such as e-commerce, fashion, and blockchain technology. I’m passionate about developing innovative digital strategies and excited to expand my work into new industries.
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-6 max-w-[544px]">
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center justify-center w-[264px] h-[159.5px] bg-[#131926] rounded-[10px] shadow-card">
-                    <div className="text-[44px] font-medium text-center">3+</div>
-                    <div className="text-[20px] font-medium text-center">Years of Experience</div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-[264px] h-[159.5px] bg-[#131926] rounded-[10px] shadow-card">
-                    <div className="text-[44px] font-medium text-center">20+</div>
-                    <div className="text-[20px] font-medium text-center">Projects Completed</div>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center justify-center w-[264px] h-[159.5px] bg-[#131926] rounded-[10px] shadow-card">
-                    <div className="text-[44px] font-medium text-center">28%</div>
-                    <div className="text-[20px] font-medium text-center">Increase in Engagement rate</div>
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-[264px] h-[159.5px] bg-[#131926] rounded-[10px] shadow-card">
-                    <div className="text-[44px] font-medium text-center">300%</div>
-                    <div className="text-[20px] font-medium text-center">Increase in Social media impression</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Services Section */}
-          <section id="services" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1160px] flex flex-col gap-10">
-              <h2 className="text-[44px] font-medium">What I Do</h2>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-wrap gap-6 justify-center">
-                  {[
-                    { icon: 'fas fa-users', title: 'Social Media Management', desc: 'Developing strategies for platforms like Instagram, LinkedIn, and X using Hootsuite.' },
-                    { icon: 'fas fa-video', title: 'Content Creation', desc: 'Producing compelling visuals and copy using Canva for campaigns.' },
-                    { icon: 'fas fa-search', title: 'SEO Optimization', desc: 'Leveraging SEMrush and Ahrefs to optimize content and drive traffic.' },
-                    { icon: 'fas fa-ad', title: 'PPC Campaigns', desc: 'Managing Google Ads and Meta Ads for targeted advertising.' },
-                    { icon: 'fas fa-envelope', title: 'Email Marketing', desc: 'Creating campaigns with Mailchimp to achieve high open and conversion rates.' },
-                    { icon: 'fas fa-chart-line', title: 'Analytics & Reporting', desc: 'Using Google Analytics to track KPIs and optimize campaigns.' },
-                    { icon: 'fas fa-tasks', title: 'Project Management', desc: 'Coordinating campaigns using Asana for efficient execution.' },
-                    { icon: 'fas fa-users-cog', title: 'Team Collaboration', desc: 'Working effectively with cross-functional teams to align strategies.' },
-                    { icon: 'fas fa-handshake', title: 'Influencer & Affiliate Marketing', desc: 'Work with creators or partners to promote products/services.' },
-                  ].map((service, index) => (
-                    <div key={index} className="flex flex-col p-8 gap-4 w-[370.67px] bg-[#131926] rounded-[10px] shadow-card hover-scale">
-                      <i className={`${service.icon} text-[32px] text-[#4E5563]`}></i>
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[20px] font-medium">{service.title}</h3>
-                        <p className="text-[16px] font-normal leading-[20px]">{service.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Projects Section */}
-          <section id="projects" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1160px] flex flex-col gap-10">
-              <h2 className="text-[44px] font-medium">Featured Projects</h2>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-wrap gap-6 justify-center">
-                  {[
-                    { title: 'SKLD Instagram Campaign', desc: 'Orchestrated a vibrant Instagram campaign for SKLD, significantly increasing follower engagement by 15%.', link: 'View Campaign' },
-                    { title: 'SKLD Promotional Reel', desc: 'Created a high-energy reel to promote SKLD\'s fashion line, achieving an 80% increase in views.', link: 'View Reel' },
-                    { title: 'SKLD Brand Awareness Reel', desc: 'Produced a reel to elevate SKLD\'s brand visibility, resulting in a 50% increase in shares.', link: 'View Reel' },
-                    { title: 'SBA Group - Propak West Africa 2024', desc: 'Managed LinkedIn content for SBA Group\'s Propak West Africa 2024, generating 500 new leads.', link: 'View Post' },
-                    { title: 'SBA Group - Bature Brewery', desc: 'Crafted LinkedIn posts to highlight SBA Group\'s collaboration with Bature Brewery.', link: 'View Post' },
-                    { title: 'SBA Group - UNIDO Oil Palm', desc: 'Developed LinkedIn content for SBA Group\'s UNIDO Oil Palm project, boosting impressions by 30%.', link: 'View Post' },
-                  ].map((project, index) => (
-                    <div key={index} className="flex flex-col p-8 gap-4 w-[370px] bg-[#131926] rounded-[10px] shadow-card hover-scale">
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[20px] font-medium">{project.title}</h3>
-                        <p className="text-[14px] font-normal leading-[18px]">{project.desc}</p>
-                      </div>
-                      <a href="#" className="text-[16px] font-bold text-[#6D6DF9]">{project.link}</a> {/* Replace # with actual links */}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Testimonials Section */}
-          <section id="testimonials" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1160px] flex flex-col gap-10">
-              <h2 className="text-[44px] font-medium">Testimonials</h2>
-              <div className="flex flex-col md:flex-row gap-[18px]">
-                {[
-                  { quote: 'Michael\'s creativity and strategic insight transformed our social media presence. His campaigns doubled our engagement, and his professionalism made collaboration seamless.', name: 'Chioma Chinweze', position: 'Marketing Manager, SKLD' },
-                  { quote: 'Working with Michael was a game-changer. His data-driven approach and innovative strategies significantly boosted our campaign performance.', name: 'John Doe', position: 'CEO, SBA Group' },
-                ].map((testimonial, index) => (
-                  <div key={index} className="flex flex-col p-8 gap-2.5 w-full md:w-[572px] h-[401px] bg-gradient-to-b from-[#131926] to-transparent backdrop-blur-[21px] rounded-[24px] shadow-card hover-scale">
-                    <div className="w-[88px] h-[68px] bg-[rgba(243,245,247,0.25)]"></div>
-                    <div className="flex flex-col gap-6">
-                      <p className="text-[20px] font-normal leading-[26px]">{testimonial.quote}</p>
-                      <div className="flex flex-col gap-4">
-                        <h3 className="text-[34px] font-medium">{testimonial.name}</h3>
-                        <p className="text-[20px] font-medium text-[#6262DF]">{testimonial.position}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Contact Section */}
-          <section id="contact" className="w-full max-w-[1442px] flex justify-center py-2.5 animate-fade-in">
-            <div className="w-[1160px] flex flex-col md:flex-row items-start gap-6 md:gap-[64px]">
-              {/* Content Area */}
-              <div className="flex flex-col justify-between items-start p-12 gap-8 w-full md:w-[464px] h-[817px] bg-[#131926] rounded-[24px]">
-                <div className="flex flex-col items-start gap-8 w-full md:w-[368px]">
-                  <div className="flex flex-col items-start gap-4 w-full md:w-[368px] h-[82px]">
-                    <h3 className="text-[20px] font-medium text-white">Get in Touch</h3>
-                    <p className="text-[16px] font-normal text-[#DBD5D5] leading-[20px] h-[40px]">
-                      I’m excited to connect and discuss how I can help elevate your brand’s digital presence.
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start gap-8 w-full md:w-[368px] h-[164px]">
-                    {/* Email Contact */}
-                    <div className="flex items-start gap-4 w-full md:w-[368px] h-[66px]">
-                      <div className="flex items-start w-[24px] h-[26px]">
-                        <i className="fas fa-envelope text-white w-[24px] h-[24px] border-2 border-white"></i>
-                      </div>
-                      <div className="flex flex-col items-start gap-2 w-[328px] h-[66px]">
-                        <p className="text-[20px] font-medium text-white">Email</p>
-                        <p className="text-[16px] font-normal text-[#DBD5D5] hidden">Placeholder support text</p>
-                      </div>
-                    </div>
-                    {/* Phone Contact */}
-                    <div className="flex items-start gap-4 w-full md:w-[368px] h-[66px]">
-                      <div className="flex items-start w-[24px] h-[26px]">
-                        <i className="fas fa-phone text-white w-[24px] h-[24px] border-2 border-white"></i>
-                      </div>
-                      <div className="flex flex-col items-start gap-2 w-[328px] h-[66px]">
-                        <p className="text-[20px] font-medium text-white">Phone</p>
-                        <p className="text-[16px] font-normal text-[#DBD5D5] hidden">Placeholder support text</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-8 w-full md:w-[368px] h-[24px]">
-                  <a href="#" className="text-[24px] text-[#4E5563] hover-scale"><i className="fab fa-instagram"></i></a> {/* Replace # with Instagram URL */}
-                  <a href="#" className="text-[24px] text-[#4E5563] hover-scale"><i className="fab fa-linkedin"></i></a> {/* Replace # with LinkedIn URL */}
-                  <a href="#" className="text-[24px] text-[#4E5563] hover-scale"><i className="fab fa-twitter"></i></a> {/* Replace # with Twitter URL */}
-                </div>
-              </div>
-              {/* Form Area */}
-              <div className="flex items-center p-[96px] gap-[64px] w-full md:w-[696px] h-[817px]">
-                <div className="flex flex-col items-start p-8 md:p-[32px] gap-12 w-full md:w-[512px] h-[625px]">
-                  <div className="flex flex-col items-start gap-5 w-full md:w-[512px] h-[43px]">
-                    <h3 className="text-[34px] font-medium text-[#101828]">Contact Me</h3>
-                  </div>
-                  <form onSubmit={handleSubmit} className="flex flex-col items-start gap-8 w-full md:w-[512px] h-[534px]">
-                    <div className="flex flex-col items-start gap-6 w-full md:w-[512px] h-[435px]">
-                      {/* Name Input */}
-                      <div className="flex flex-col items-start w-full md:w-[512px] h-[68px]">
-                        <label className="text-[16px] font-medium text-[#131926]">Name</label>
-                        <input
-                          type="text"
-                          placeholder="Enter your name"
-                          className="w-full md:w-[512px] h-[42px] p-3 border border-[#D0D5DD] rounded-[8px] text-[14px] text-[#667085] shadow-sm"
-                          required
-                        />
-                      </div>
-                      {/* Email Input */}
-                      <div className="flex flex-col items-start w-full md:w-[512px] h-[68px]">
-                        <label className="text-[16px] font-medium text-[#131926]">Email</label>
-                        <input
-                          type="email"
-                          placeholder="Enter your email"
-                          className="w-full md:w-[512px] h-[42px] p-3 border border-[#D0D5DD] rounded-[8px] text-[14px] text-[#667085] shadow-sm"
-                          required
-                        />
-                      </div>
-                      {/* Phone Input */}
-                      <div className="flex flex-col items-start w-full md:w-[512px] h-[73px]">
-                        <label className="text-[16px] font-medium text-[#131926]">Phone</label>
-                        <div className="flex gap-2 w-full md:w-[512px] h-[47px]">
-                          <select className="w-[72px] h-[47px] p-3 border border-[#D0D5DD] rounded-[8px] text-[14px] text-[#667085] shadow-sm">
-                            <option>NG</option>
-                            <option>US</option>
-                            <option>UK</option>
-                          </select>
-                          <input
-                            type="tel"
-                            placeholder="Enter your phone"
-                            className="flex-1 h-[42px] p-3 border border-[#D0D5DD] rounded-[8px] text-[14px] text-[#667085] shadow-sm"
-                            required
-                          />
-                        </div>
-                      </div>
-                      {/* Message Textarea */}
-                      <div className="flex flex-col items-start w-full md:w-[512px] h-[154px]">
-                        <label className="text-[16px] font-medium text-[#131926]">Message</label>
-                        <textarea
-                          placeholder="Enter your message"
-                          className="w-full md:w-[512px] h-[128px] p-2.5 border border-[#D0D5DD] rounded-[8px] text-[14px] text-[#667085] shadow-sm"
-                          required
-                        ></textarea>
-                      </div>
-                    </div>
-                    <button
-                      type="submit"
-                      className="px-6 py-4 bg-[#6D6DF9] text-white rounded-[100px] text-[16px] font-work-sans font-normal hover-scale"
-                    >
-                      Send Message
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Footer */}
-          <footer className="w-full max-w-[1442px] flex justify-center py-4 border-t border-[#131926]">
-            <p className="text-[16px] font-work-sans text-[#4E5563]">© 2025 Michael Otujo. All rights reserved.</p>
-          </footer>
         </div>
-      );
-    };
-
-    ReactDOM.render(<App />, document.getElementById('root'));
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    </header>
+    <div class="body-content">
+        <section id="hero" class="hero">
+            <div class="introduction flex-row">
+                <div class="intro-text">
+                    <div class="intro-details">
+                        <div class="hello">Hello, I’m Michael Otujo</div>
+                        <div class="title">Digital Marketing Specialist</div>
+                        <div class="description">I’m a results-driven digital marketer with over three years of experience in online marketing, social media strategy, and content marketing. I help brands grow their digital presence and connect with their audience in meaningful, impactful ways.</div>
+                    </div>
+                    <div class="buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="cv.pdf" download class="btn btn-secondary">Download CV</a>
+                    </div>
+                </div>
+                <div class="profile">
+                    <div class="hero-image"></div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="about">
+            <div class="about-content flex-row">
+                <div class="about-text">
+                    <div class="about-header">About me</div>
+                    <div class="about-des">
+                        <div class="about-title">Driving Growth Through Strategy</div>
+                        <div class="about-desc">I’ve successfully driven a 300% increase in social media impressions and achieved a 28% engagement rate by using tools like SEMrush, Google Analytics, and Mailchimp with strategic precision. My expertise spans both B2B and B2C campaigns across industries such as e-commerce, fashion, and blockchain technology. I’m passionate about developing innovative digital strategies and excited to expand my work into new industries.</div>
+                    </div>
+                </div>
+                <div class="about-cards">
+                    <div class="metric-row">
+                        <div class="metric-card">
+                            <div class="metric-number-text">
+                                <div class="metric-number">3+</div>
+                                <div class="metric-text">Years of Experience</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-number-text">
+                                <div class="metric-number">50+</div>
+                                <div class="metric-text">Campaigns Managed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-card">
+                            <div class="metric-number-text">
+                                <div class="metric-number">300%</div>
+                                <div class="metric-text">Increase in Impressions</div>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-number-text">
+                                <div class="metric-number">28%</div>
+                                <div class="metric-text">Engagement Rate Achieved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="services" class="services">
+            <div class="services-content">
+                <div class="services-header">What I Do</div>
+                <div class="service-cards">
+                    <div class="service-row">
+                        <div class="service-card">
+                            <div class="service-icon social-media-icon">
+                                <i class="material-icons">trending_up</i> <!-- material-symbols:stress-management -->
+                            </div>
+                            <div class="service-header">Social Media Management</div>
+                            <div class="service-desc">Developing strategies for platforms like Instagram, LinkedIn, and X using Hootsuite.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon video-optimize-icon">
+                                <i class="material-icons">movie_filter</i> <!-- fluent:video-clip-optimize-28-filled -->
+                            </div>
+                            <div class="service-header">Video Optimization</div>
+                            <div class="service-desc">Optimizing video content for better reach and engagement.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon seo-icon">
+                                <i class="material-icons">search</i> <!-- grommet-icons:optimize -->
+                            </div>
+                            <div class="service-header">SEO Optimization</div>
+                            <div class="service-desc">Improving search engine rankings using SEMrush and other tools.</div>
+                        </div>
+                    </div>
+                    <div class="service-row">
+                        <div class="service-card">
+                            <div class="service-icon content-creation-icon">
+                                <i class="material-icons">edit</i> <!-- ic:round-movie-creation -->
+                            </div>
+                            <div class="service-header">Content Creation</div>
+                            <div class="service-desc">Creating engaging content for social media and marketing campaigns.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon email-marketing-icon">
+                                <i class="mdi mdi-email"></i> <!-- mdi:email -->
+                            </div>
+                            <div class="service-header">Email Marketing</div>
+                            <div class="service-desc">Designing and executing email campaigns using Mailchimp.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon analytics-icon">
+                                <i class="material-icons">analytics</i> <!-- carbon:analytics -->
+                            </div>
+                            <div class="service-header">Analytics & Reporting</div>
+                            <div class="service-desc">Analyzing campaign performance with Google Analytics.</div>
+                        </div>
+                    </div>
+                    <div class="service-row">
+                        <div class="service-card">
+                            <div class="service-icon content-strategy-icon">
+                                <i class="material-icons">description</i> <!-- Placeholder for content strategy -->
+                            </div>
+                            <div class="service-header">Content Strategy</div>
+                            <div class="service-desc">Planning and executing content strategies for brands.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon team-collaboration-icon">
+                                <i class="material-icons">group</i> <!-- Placeholder for team collaboration -->
+                            </div>
+                            <div class="service-header">Team Collaboration</div>
+                            <div class="service-desc">Working with teams to align marketing goals.</div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon project-management-icon">
+                                <i class="material-icons">assignment</i> <!-- Placeholder for project management -->
+                            </div>
+                            <div class="service-header">Project Management</div>
+                            <div class="service-desc">Managing marketing projects from inception to completion.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="projects">
+            <div class="projects-content">
+                <div class="projects-header">Featured Projects</div>
+                <div class="project-cards">
+                    <div class="project-row">
+                        <div class="project-card">
+                            <div class="project-title">Social Media Campaign for E-commerce Brand</div>
+                            <div class="project-desc">Led a campaign that increased impressions by 300% and engagement by 28%.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">B2B LinkedIn Strategy</div>
+                            <div class="project-desc">Boosted brand visibility and drove meaningful connections.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">Fashion Brand Content Marketing</div>
+                            <div class="project-desc">Created content that resonated with the audience.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                    </div>
+                    <div class="project-row">
+                        <div class="project-card">
+                            <div class="project-title">Blockchain Tech SEO Optimization</div>
+                            <div class="project-desc">Improved search rankings and drove traffic.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">Email Marketing for Startup</div>
+                            <div class="project-desc">Achieved high open rates and conversions.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-title">Video Content Series</div>
+                            <div class="project-desc">Produced videos that went viral on social platforms.</div>
+                            <a href="#" class="view-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="testimonials" class="testimonials">
+            <div class="testimonials-content">
+                <div class="testimonials-header">Testimonials</div>
+                <div class="testimonial-cards flex-row">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">Michael's creativity and strategic insight transformed our social media presence. His campaigns doubled our engagement, and his professionalism made collaboration seamless.</div>
+                        <div class="testimonial-name">Chioma Chinweze</div>
+                        <div class="testimonial-position">Marketing Manager, SKLD</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">Working with Michael was a game-changer. His LinkedIn content strategies significantly boosted our brand visibility and drove meaningful B2B connections.</div>
+                        <div class="testimonial-name">Amith Sukhnundan</div>
+                        <div class="testimonial-position">Marketing Director, SBA Group</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <div class="contact-header">Get In Touch</div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-details">
+                            <div class="contact-header">Contact Me</div>
+                            <div class="description">Feel free to reach out for collaborations or just a friendly hello.</div>
+                        </div>
+                        <div class="social-links">
+                            <div class="social-icon"></div>
+                            <div class="social-icon"></div>
+                            <div class="social-icon"></div>
+                            <div class="social-icon"></div>
+                            <div class="social-icon"></div>
+                        </div>
+                    </div>
+                    <div class="contact-form-section">
+                        <div class="contact-form">
+                            <div class="form-header">Send a Message</div>
+                            <form class="form-fields">
+                                <label class="input-label">Name</label>
+                                <input type="text" class="input-field" placeholder="Your Name">
+                                <label class="input-label">Email</label>
+                                <input type="email" class="input-field" placeholder="Your Email">
+                                <label class="input-label">Subject</label>
+                                <input type="text" class="input-field" placeholder="Subject">
+                                <label class="input-label">Message</label>
+                                <textarea class="input-field textarea-field" placeholder="Your Message"></textarea>
+                                <button type="submit" class="submit-btn">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
